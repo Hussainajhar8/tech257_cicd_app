@@ -1,14 +1,8 @@
 ### Jenkins Setup Guide
 
-#### Logging into Jenkins
-
-- **URL:** [http://35.176.97.54:8080/](http://35.176.97.54:8080/)
-- **Username:** devopslondon
-- **Password:** DevOpsAdmin
-
 #### Creating a Basic Job
 
-1. Go to Jenkins and log in using the provided credentials.
+1. Go to Jenkins and log in using your credentials.
 2. Click on "New Item" to create a new job.
 3. Select "Freestyle project" and click "OK".
    ![alt text](img/image.png)
