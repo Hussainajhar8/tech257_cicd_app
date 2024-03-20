@@ -8,7 +8,7 @@
 3. Select "Freestyle project" and click "OK".
    ![alt text](img/image.png)
 
-#### Configuring Job Settings
+#### Configuring Job Setting
 
 1. Under the "General" section, select "Discard old builds".
 2. Set "Max # of builds to keep" to 3 to manage server resources efficiently.
