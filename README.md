@@ -1,5 +1,5 @@
 ### Jenkins Setup Guide
-
+![alt text](img/image-5.png)
 #### Creating a Basic Job
 
 1. Go to Jenkins and log in using your credentials.
