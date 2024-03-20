@@ -1,4 +1,5 @@
-### Jenkins Setup Guide
+# Jenkins Setup Guide
+### Jenkins Diagram
 ![alt text](img/image-5.png)
 #### Creating a Basic Job
 
