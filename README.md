@@ -39,7 +39,7 @@
 ![alt text](img/image-3.png)
 (This will run the "tech257-ajhar-testing-timezone" job upon successful build of this job.)
 
-### Setting up Continuous Integration (CI) with Jenkins
+## Setting up Continuous Integration (CI) with Jenkins
 
 #### Creating a CI Job
 
