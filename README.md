@@ -138,7 +138,7 @@
 After testing, it has been confirmed that the pipeline is functional and operational.
 ![alt text](img/image-27.png)
 
-### Deploying the Application
+## Deploying the Application
 
 To deploy the application, follow these steps:
 
