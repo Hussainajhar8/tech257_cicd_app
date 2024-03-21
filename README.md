@@ -90,6 +90,6 @@
 
 #### Testing the CI Pipeline
 
-1. Push some changes from your local machine to the GitHub repository.
+1. Push the changes from your local machine to the GitHub repository.
 2. Observe Jenkins running a build job for the changes pushed.
 3. Successful execution indicates the successful setup of CI.
