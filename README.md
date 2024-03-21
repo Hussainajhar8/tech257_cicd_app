@@ -164,3 +164,45 @@ To deploy the application, follow these steps:
 5. **Verify Deployment:**
    - After the build process, access the IP address of the EC2 instance to ensure that the default webpage is displayed.
      ![alt text](img/image-17.png)
+
+## Setting Up Application on Port 3000
+
+To configure our application to run on port 3000, follow these steps:
+
+1. **Update Application and Environment:**
+   - Ensure that the latest version of the application and environment folder is available on our VM.
+   - Use the `rsync` command in the "ajhar-cd" job script in Jenkins to synchronize the folders.
+   ![alt text](img/image-18.png)
+
+2. **SSH into EC2 Instance:**
+   - Use SSH to connect to the EC2 instance:
+     ```bash
+     ssh -i "tech257.pem" ubuntu@ec2-18-201-139-145.eu-west-1.compute.amazonaws.com
+     ```
+
+3. **Navigate to Script Folder:**
+   - Change directory to the script folder, set permissions, and execute the script:
+     ```bash
+     cd environment/app
+     chmod +x provision.sh
+     ./provision.sh
+     ```
+     ![alt text](img/image-19.png)
+
+4. **Install Dependencies and Start Application:**
+   - After the script execution, navigate to the app folder install npm dependencies then start npm:
+     ```bash
+     cd ~/app
+     npm install
+     npm start
+     ```
+     ![alt text](img/image-29.png)
+
+6. **Access Application:**
+   - Verify that the application is accessible at port 3000.
+   ![alt text](img/image-30.png)
+
+7. **Automate with Jenkins:**
+   - Once the manual process is confirmed to work, integrate these steps into our Jenkins shell script.
+   ![alt text](img/image-31.png)
+
