@@ -138,3 +138,8 @@
 1. Identified a blocker due to improper naming of a command during the CI merge job setup.
 2. Will rectify the issue by renaming the command and simulating the build again.
    ![alt text](image-6.png)
+
+### Confirmation of Pipeline Functionality
+
+After testing, it has been confirmed that the pipeline is functional and operational.
+![alt text](image-7.png)
