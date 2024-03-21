@@ -143,3 +143,30 @@
 
 After testing, it has been confirmed that the pipeline is functional and operational.
 ![alt text](img/image-27.png)
+
+### Deploying the Application
+
+To deploy the application, follow these steps:
+
+1. **Create EC2 Instance:**
+   - Launch a new EC2 instance on AWS.
+     ![alt text](img/image-4.png)
+
+2. **Set Up Jenkins Job:**
+   - Create a new Jenkins job and insert the GitHub project URL.
+     ![alt text](img/image-6.png)
+   - Configure the source code management, providing the private key for accessing our repository.
+     ![alt text](img/image-7.png)
+
+3. **Configure Build Environment:**
+   - Set up an SSH agent in the build environment.
+   - Provide the PEM file for Jenkins to access the EC2 instance.
+     ![alt text](img/image-8.png)
+
+4. **Build Process:**
+   - In the build section, add commands for Jenkins to set up an Nginx server on the EC2 instance.
+     ![alt text](img/image-10.png)
+
+5. **Verify Deployment:**
+   - After the build process, access the IP address of the EC2 instance to ensure that the default webpage is displayed.
+     ![alt text](img/image-17.png)
