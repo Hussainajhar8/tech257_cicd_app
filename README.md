@@ -93,3 +93,42 @@
 1. Push the changes from your local machine to the GitHub repository.
 2. Observe Jenkins running a build job for the changes pushed.
 3. Successful execution indicates the successful setup of CI.
+
+## Setting up CI Merge Job
+
+#### Creating a Development Branch
+
+1. Create a new branch called "dev".
+   ![alt text](image.png)
+
+#### Modifying CI Job Configuration
+
+1. In the existing CI job, change the branch from "main" to "dev" in the configuration settings.
+   ![alt text](image-1.png)
+
+#### Creating CI Merge Job
+
+1. Create a new freestyle project for the CI merge job.
+2. Configure the job similar to the previous CI job.
+3. Insert the project URL.
+   ![alt text](image-2.png)
+
+#### Specifying Execution Environment
+
+1. Configure the `sparta_ubuntu_node` to run the CI merge job.
+
+#### Configuring Source Code Management
+
+1. Use the same source code management settings as the previous job.
+2. Ensure it is configured to pull code from the "main" branch.
+   ![alt text](image-3.png)
+
+#### Defining Build Steps
+
+1. Add a build script to merge the "dev" branch into the "main" branch.
+   ![alt text](image-4.png)
+
+#### Triggering Merge Job
+
+1. Configure the CI job to trigger the merge job upon successful build.
+   ![alt text](image-5.png)
