@@ -132,3 +132,9 @@
 
 1. Configure the CI job to trigger the merge job upon successful build.
    ![alt text](image-5.png)
+
+### Troubleshooting Blocker Issue
+
+1. Identified a blocker due to improper naming of a command during the CI merge job setup.
+2. Will rectify the issue by renaming the command and simulating the build again.
+   ![alt text](image-6.png)
