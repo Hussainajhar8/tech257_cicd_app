@@ -133,18 +133,12 @@
 1. Configure the CI job to trigger the merge job upon successful build.
    ![alt text](img/image-25.png)
 
-### Troubleshooting Blocker Issue
-
-1. Identified a blocker due to improper naming of a command during the CI merge job setup.
-2. Will rectify the issue by renaming the command and simulating the build again.
-   ![alt text](img/image-26.png)
-
-### Confirmation of Pipeline Functionality
+#### Confirmation of Pipeline Functionality
 
 After testing, it has been confirmed that the pipeline is functional and operational.
 ![alt text](img/image-27.png)
 
-### Deploying the Application
+## Deploying the Application
 
 To deploy the application, follow these steps:
 
