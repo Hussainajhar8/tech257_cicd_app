@@ -16,9 +16,11 @@ curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 sudo apt-get install nodejs -y
 
 # install pm2
-sudo npm install pm2 -g
-
 sudo apt-get install nginx -y
+
+sudo apt install npm -y
+
+sudo npm install pm2 -g
 
 # remove the old file and add our one
 #sudo rm /etc/nginx/sites-available/default
