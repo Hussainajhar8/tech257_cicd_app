@@ -313,14 +313,14 @@ To configure our application to run on port 3000, follow these steps:
 ## Installing and Setting up Jenkins on Ubuntu EC2 Instance
 
 1. **Create EC2 Instance:**
-   - Launch an EC2 instance with the Ubuntu image and t2.micro instance type.
-   ![alt text](image-43.png)
+   - Launch an EC2 instance with the Ubuntu img/image and t2.micro instance type.
+   ![alt text](img/image-43.png)
    - In the security group settings, allow access to ports 22, 80, and 8080.
-   ![alt text](image-44.png)
+   ![alt text](img/image-44.png)
 
 2. **SSH into the Instance:**
    - Connect to the EC2 instance via SSH.
-   ![alt text](image-45.png)
+   ![alt text](img/image-45.png)
 
 3. **Update System:**
    - Ensure the system is up-to-date:
@@ -352,38 +352,63 @@ To configure our application to run on port 3000, follow these steps:
       sudo apt-get update -y
       sudo apt-get install jenkins -y
       ```
+6. **Install Nodejs**
+   - Install nodejs for our application to run on jenkins
+      ```bash
+      curl -fsSL https://deb.nodesource.com/setup_17.x |sudo -E bash -
+      sudo apt-get install -y nodejs
+      ```
 
 
-6. **Start Jenkins:**
+7. **Start Jenkins:**
    - Enable and start Jenkins service:
      ```bash
      sudo systemctl enable jenkins
      sudo systemctl start jenkins
      ```
 
-7. **Check Jenkins Status:**
+8. **Check Jenkins Status:**
    - Verify Jenkins service status:
      ```bash
      sudo systemctl status jenkins
      ```
-     ![alt text](image-46.png)
+     ![alt text](img/image-46.png)
 
-8. **Access Jenkins Web Interface:**
+9.  **Access Jenkins Web Interface:**
    - If Jenkins is running, access it via `<public-ip>:8080` in a web browser.
-   ![alt text](image-47.png) 
+   ![alt text](img/image-47.png) 
    - Retrieve the initial admin password:
      ```bash
      sudo cat /var/lib/jenkins/secrets/initialAdminPassword
      ```
-   ![alt text](image-48.png)
+   ![alt text](img/image-48.png)
    - Enter the provided password in the browser.
    - Select "Install suggested plugins" for plugin installation.
-   ![alt text](image-49.png)
+   ![alt text](img/image-49.png)
    - Set up the first admin user.
-   ![alt text](image-50.png)
+   ![alt text](img/image-50.png)
    - Save and finish the setup.
-   ![alt text](image-51.png)
-9. **Setup Complete:**
+   ![alt text](img/image-51.png)
+10. **Setup Complete:**
    - Jenkins server is successfully deployed on the Ubuntu EC2 instance.
-   ![alt text](image-52.png)
-   ![alt text](image-53.png)
+   ![alt text](img/image-52.png)
+   ![alt text](img/image-53.png)
+
+## Recreating Jenkins Jobs
+
+To recreate the 3 jobs on the new Jenkins server, follow these steps first to avoid blockers:
+
+1. **Private Key Recognition Issue:**
+   - Go to Jenkins Dashboard -> Manage Jenkins -> Security.
+   - Scroll to the bottom and find "Git Host Key Verification Configuration".
+   - Select "Accept first connection" to resolve the private key recognition issue for the GitHub repo.
+   ![alt text](img/image-54.png)
+
+2. **Installing SSH Agent Plugin:**
+   - Go to Jenkins Dashboard -> Manage Jenkins -> Plugins.
+   - Search for "SSH Agent" plugin.
+   - Install and enable the SSH Agent plugin to make it available as a build environment option.
+   ![alt text](img/image-55.png)
+
+After resolving these blockers, recreate the 3 jobs on the new Jenkins server.
+![alt text](img/image-56.png)
