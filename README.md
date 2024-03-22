@@ -296,3 +296,94 @@ To configure our application to run on port 3000, follow these steps:
 
 #### Note:
 - The confirmation URL for the deployed application is not accessible due to being stopped.
+
+## Testing Working Pipeline with Git Push from Local Machine
+
+1. **Commit and Push Changes:**
+   - Commit your local changes and push them to the remote repository:
+     ```bash
+     git add .
+     git commit -m "Your commit message"
+     git push origin main
+     ```
+
+2. **Monitor Jenkins Build:**
+   - Jenkins will automatically detect the changes pushed to the dev branch and trigger the pipeline. From monitoring the Jenkins dashboard for the build and deployment progress we can see our pipeline has worked successfully.
+
+## Installing and Setting up Jenkins on Ubuntu EC2 Instance
+
+1. **Create EC2 Instance:**
+   - Launch an EC2 instance with the Ubuntu image and t2.micro instance type.
+   ![alt text](image-43.png)
+   - In the security group settings, allow access to ports 22, 80, and 8080.
+   ![alt text](image-44.png)
+
+2. **SSH into the Instance:**
+   - Connect to the EC2 instance via SSH.
+   ![alt text](image-45.png)
+
+3. **Update System:**
+   - Ensure the system is up-to-date:
+     ```bash
+     sudo apt update -y
+     sudo apt upgrade -y
+     ```
+
+4. **Install Java:**
+   - Jenkins requires Java, install OpenJDK:
+      ```bash
+      sudo apt update -y
+      sudo apt install fontconfig openjdk-17-jre -y
+      java -version
+      openjdk version "17.0.8" 2023-07-18
+      OpenJDK Runtime Environment (build 17.0.8+7-Debian-1deb12u1)
+      OpenJDK 64-Bit Server VM (build 17.0.8+7-Debian-1deb12u1, mixed mode, sharing)
+      ```
+
+
+5. **Install Jenkins:**
+   - Download Jenkins repository key and add Jenkins package repository:
+     ```bash
+      sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+      https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+      echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+      https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+      /etc/apt/sources.list.d/jenkins.list > /dev/null
+      sudo apt-get update -y
+      sudo apt-get install jenkins -y
+      ```
+
+
+6. **Start Jenkins:**
+   - Enable and start Jenkins service:
+     ```bash
+     sudo systemctl enable jenkins
+     sudo systemctl start jenkins
+     ```
+
+7. **Check Jenkins Status:**
+   - Verify Jenkins service status:
+     ```bash
+     sudo systemctl status jenkins
+     ```
+     ![alt text](image-46.png)
+
+8. **Access Jenkins Web Interface:**
+   - If Jenkins is running, access it via `<public-ip>:8080` in a web browser.
+   ![alt text](image-47.png) 
+   - Retrieve the initial admin password:
+     ```bash
+     sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+     ```
+   ![alt text](image-48.png)
+   - Enter the provided password in the browser.
+   - Select "Install suggested plugins" for plugin installation.
+   ![alt text](image-49.png)
+   - Set up the first admin user.
+   ![alt text](image-50.png)
+   - Save and finish the setup.
+   ![alt text](image-51.png)
+9. **Setup Complete:**
+   - Jenkins server is successfully deployed on the Ubuntu EC2 instance.
+   ![alt text](image-52.png)
+   ![alt text](image-53.png)
