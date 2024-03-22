@@ -206,3 +206,93 @@ To configure our application to run on port 3000, follow these steps:
    - Once the manual process is confirmed to work, integrate these steps into our Jenkins shell script.
    ![alt text](img/image-31.png)
 
+## Continuous Deployment
+
+### Manual Deployment:
+1. **SSH into VM:**
+   - Use SSH to connect to our VM and navigate to the app folder:
+     ```bash
+     ssh -i "tech257.pem" ubuntu@<ip_address>
+     cd /home/ubuntu/app
+     ```
+     
+
+2. **Provisioning Script:**
+   - Ensure permission and execute the provisioning script:
+     ```bash
+     chmod +x ~/environment/app/provision.sh
+     ~/environment/app/provision.sh
+     ```
+     ![alt text](img/image-32.png)
+
+3. **Install Dependencies:**
+   - Verify npm installation in the app folder and install pm2:
+     ```bash
+     npm install
+     sudo npm install pm2@latest -g
+     ```
+     ![alt text](img/image-33.png)
+     ![alt text](img/image-34.png)
+
+4. **Kill Node Processes:**
+   - Terminate any existing node processes to free port 3000:
+     ```bash
+     pm2 kill
+     ```
+     ![alt text](img/image-35.png)
+
+5. **Start Application with PM2:**
+   - Start the application with pm2 and save the process to run in the background:
+     ```bash
+     pm2 start app.js
+     pm2 save
+     ```
+     ![alt text](img/image-36.png)
+
+6. **Confirm Application Deployment:**
+   - Ensure the application is running in the background using pm2 by checking domain.
+   ![alt text](img/image-37.png)
+
+#### Automated Deployment (Jenkins):
+1. **Jenkins Shell Script:**
+   - Use the following script in Jenkins to automate the deployment process:
+   ![alt text](img/image-38.png)
+     ```bash
+     # Synchronize "app" to "/home/ubuntu/" on our app vm
+     rsync -avz -e "ssh -o StrictHostKeyChecking=no" repo/app ubuntu@52.51.186.165:/home/ubuntu/
+
+     # Synchronize "environment" to "/home/ubuntu/" on our app vm
+     rsync -avz -e "ssh -o StrictHostKeyChecking=no" repo/environment ubuntu@52.51.186.165:/home/ubuntu/
+
+     # Ensure aws sg allows ssh to jenkins ip, tech257 pem provided to jenkins and ec2 is runnning
+     ssh -o "StrictHostKeyChecking=no" ubuntu@52.51.186.165 <<EOF
+      sudo apt-get update -y
+      sudo apt-get upgrade -y
+      sudo apt-get install nginx -y
+      sudo systemctl restart nginx
+      sudo systemctl enable nginx
+      
+      cd ~/app
+      chmod +x ~/environment/app/provision.sh
+      ../environment/app/provision.sh
+      
+      npm install
+      sudo npm install pm2@latest -g
+      pm2 kill
+      pm2 start app.js
+      pm2 save
+     EOF
+     ```
+     
+#### Testing Deployment:
+- Manually kill pm2 in the VM to disable application.
+![alt text](img/image-39.png)
+- Confirm application is no longer accessible.
+  ![alt text](img/image-40.png)
+- Trigger the "ajhar-cd" job in Jenkins.
+  ![alt text](img/image-41.png) 
+- Verify successful build and deployment of the application.
+  ![alt text](img/image-42.png)
+
+#### Note:
+- The confirmation URL for the deployed application is not accessible due to being stopped.
